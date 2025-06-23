@@ -1,0 +1,21 @@
+[package]
+name = "amplifier_lints"
+version = "0.1.0"
+authors = ["authors go here"]
+description = "description goes here"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
+
+dylint_linting = { workspace = true }
+
+[dev-dependencies]
+dylint_testing = { workspace = true }
+
+[package.metadata.rust-analyzer]
+rustc_private = true
