@@ -30,15 +30,13 @@ To run a lint/library of lints from this repository, in the target workspace, ad
 
 ```sh
 [workspace.metadata.dylint]
-libraries = [
-    { 
-        git = "https://github.com/axelarnetwork/axelar-lints",
-        branch = "..", # Optional, for testings axelar-lints branches
-        pattern = [
-            "amplifier-lints",
-            ...
-        ]
-    },
+
+[[workspace.metadata.dylint.libraries]]
+git = "https://github.com/axelarnetwork/axelar-lints",
+branch = "..", # Optional, for testings axelar-lints branches
+pattern = [
+    "amplifier-lints",
+    ...
 ]
 ```
 to the `Cargo.toml` file, and run `cargo dylint --all`.

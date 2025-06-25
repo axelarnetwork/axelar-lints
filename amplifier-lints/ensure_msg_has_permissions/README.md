@@ -1,23 +1,28 @@
-# template
-
 ### What it does
+
+Checks whether an `ExecuteMsg` enum is annotated with `#[derive(EnsurePermissions)]`.
 
 ### Why is this bad?
 
-### Known problems
+Without deriving `EnsurePermissions`, permission checks can be skipped for `ExecuteMsg` -- unsafe.
 
-Remove if none.
+### Known problems
 
 ### Example
 
 ```rust
-// example code where a warning is issued
+#[cw_serde]
+enum ExecuteMsg {
+    ...
+}
 ```
 
 Use instead:
 
 ```rust
-// example code that does not raise a warning
+#[cw_serde]
+#[derive(EnsurePermissions)]
+enum ExecuteMsg {
+    ...
+}
 ```
-
-- TODO
