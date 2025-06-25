@@ -12,34 +12,6 @@ use rustc_span::symbol::Ident;
 use rustc_middle::ty::{AssocKind};
 
 dylint_linting::declare_late_lint! {
-    /// ### What it does
-    ///
-    /// Checks whether an `ExecuteMsg` enum is annotated with `#[derive(EnsurePermissions)]`.
-    ///
-    /// ### Why is this bad?
-    ///
-    /// Without deriving `EnsurePermissions`, permission checks can be skipped for `ExecuteMsg` -- unsafe.
-    ///
-    /// ### Known problems
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// #[cw_serde]
-    /// enum ExecuteMsg {
-    ///     ...
-    /// }
-    /// ```
-    ///
-    /// Use instead:
-    ///
-    /// ```rust
-    /// #[cw_serde]
-    /// #[derive(EnsurePermissions)]
-    /// enum ExecuteMsg {
-    ///     ...
-    /// }
-    /// ```
     pub ENSURE_MSG_HAS_PERMISSIONS,
     Warn,
     "warns if any ExecuteMsg has no `#[derive(EnsurePermissions)]`"
@@ -70,4 +42,9 @@ impl<'tcx> LateLintPass<'tcx> for EnsureMsgHasPermissions {
             _ => {}
         }
     }
+}
+
+#[test]
+fn ui() {
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui");
 }
