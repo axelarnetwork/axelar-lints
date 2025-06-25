@@ -17,6 +17,7 @@ version = "0.1.0"
 dependencies = [
  "dylint_linting",
  "dylint_testing",
+ "ensure_msg_has_permissions",
  "warn_on_unwraps",
 ]
 
@@ -326,6 +327,14 @@ dependencies = [
  "regex",
  "serde_json",
  "tempfile",
+]
+
+[[package]]
+name = "ensure_msg_has_permissions"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
 ]
 
 [[package]]

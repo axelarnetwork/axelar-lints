@@ -1,0 +1,16 @@
+warning: avoid using `unwrap` if possible
+  --> $DIR/main.rs:2:22
+   |
+LL |     let _ = Some(42).unwrap();
+   |                      ^^^^^^^^
+   |
+   = note: `#[warn(warn_on_unwraps)]` on by default
+
+warning: avoid using `unwrap` if possible
+  --> $DIR/main.rs:6:39
+   |
+LL |     let _ = Result::<i32, ()>::Ok(42).unwrap();
+   |                                       ^^^^^^^^
+
+warning: 2 warnings emitted
+

@@ -7,6 +7,7 @@ Built using the `dylint` library (https://github.com/trailofbits/dylint).
 ### Installing Dylint
 
 ```sh
+# If this causes issues, try switching to a more recent version of rust.
 cargo install cargo-dylint dylint-link
 ```
 
@@ -20,7 +21,9 @@ You can set up a lint with `cargo dylint new new_lint_name`. Your `new_lint_name
 
 Combined libraries can contain a number of your lints. They have [a number of requirements for the organization](https://github.com/trailofbits/dylint/blob/master/examples/general/README.md). Follow these requirements to get one working.
 
-- TODO: add tools/resources to write lints
+Here are some resources for creating lints:
+- Dylint has some [good example lints](https://github.com/trailofbits/dylint/tree/master/examples) that can help you get a good feel for how lints work.
+- Starting from [LateLintPass in the rust docs](https://doc.rust-lang.org/stable/nightly-rustc/rustc_lint/trait.LateLintPass.html) and searching for functions in the rust docs can help in finding specific functionality for linting.
 
 ### Running Dylint on Target Workspaces 
 
@@ -28,11 +31,13 @@ To run a lint/library of lints from this repository, in the target workspace, ad
 
 ```sh
 [workspace.metadata.dylint]
-libraries = [
-    { git = "https://github.com/axelarnetwork/axelar-lints", pattern = [
-        "amplifier-lints",
-        ...
-    ] },
+
+[[workspace.metadata.dylint.libraries]]
+git = "https://github.com/axelarnetwork/axelar-lints",
+branch = "..", # Optional, for testings axelar-lints branches
+pattern = [
+    "amplifier-lints",
+    ...
 ]
 ```
 to the `Cargo.toml` file, and run `cargo dylint --all`.

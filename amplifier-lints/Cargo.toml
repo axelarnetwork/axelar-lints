@@ -11,6 +11,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
+ensure_msg_has_permissions = { path = "ensure_msg_has_permissions", features = ["rlib"] }
 
 dylint_linting = { workspace = true }
 
