@@ -12,6 +12,25 @@ use rustc_middle::ty;
 use rustc_span::sym;
 
 dylint_linting::declare_late_lint! {
+    /// ### What it does
+    ///
+    /// ### Why is this bad?
+    ///
+    /// ### Known problems
+    ///
+    /// Remove if none.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// // example code where a warning is issued
+    /// ```
+    ///
+    /// Use instead:
+    ///
+    /// ```rust
+    /// // example code that does not raise a warning
+    /// ```
     pub WARN_ON_UNWRAPS,
     Warn,
     "warns if `Option::unwrap` or `Result::unwrap` is called"
