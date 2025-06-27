@@ -1,5 +1,5 @@
 [package]
-name = "warn_on_unwraps"
+name = "ensure_msg_has_permissions"
 version = "0.1.0"
 authors = ["authors go here"]
 description = "description goes here"

@@ -10,4 +10,5 @@ extern crate rustc_session;
 #[unsafe(no_mangle)]
 pub fn register_lints(sess: &rustc_session::Session, lint_store: &mut rustc_lint::LintStore) {
     warn_on_unwraps::register_lints(sess, lint_store);
+    ensure_msg_has_permissions::register_lints(sess, lint_store);
 }

@@ -1,21 +1,29 @@
-# template
-
 ### What it does
+    
+Emits a warning whenever `unwrap()` is called on an `Option` or `Result` type.
 
 ### Why is this bad?
 
-### Known problems
+Using `unwrap()` can cause a panic at runtime if the value is `None` or `Err`.
 
-Remove if none.
+### Known problems
 
 ### Example
 
 ```rust
-// example code where a warning is issued
+let value: Option<i32> = None;
+let x = value.unwrap();
 ```
 
 Use instead:
 
 ```rust
-// example code that does not raise a warning
+// still panics, but with context
+let value: Option<i32> = None;
+let x = value.expect("Expected a value"); 
+
+// can use safer alternative:
+let x = value.unwrap_or(0); 
+
+// or use pattern matching if let
 ```

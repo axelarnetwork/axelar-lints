@@ -43,3 +43,8 @@ impl<'tcx> LateLintPass<'tcx> for WarnOnUnwraps {
         }
     }
 }
+
+#[test]
+fn ui() {
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui");
+}
