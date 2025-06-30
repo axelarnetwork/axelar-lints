@@ -7,6 +7,7 @@ Built using the `dylint` library (https://github.com/trailofbits/dylint).
 ### Installing Dylint
 
 ```sh
+# If this causes issues, try switching to a more recent version of rust.
 cargo install cargo-dylint dylint-link
 ```
 
