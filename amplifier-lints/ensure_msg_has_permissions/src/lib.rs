@@ -29,12 +29,15 @@ impl<'tcx> LateLintPass<'tcx> for EnsureMsgHasPermissions {
 
             for impl_id in impls {
                 let associated_items = cx.tcx.associated_items(impl_id);
-                if associated_items.find_by_name_and_kind(
-                    cx.tcx,
-                    Ident::from_str("ensure_permissions"),
-                    AssocKind::Fn,
-                    item.owner_id.to_def_id(),
-                ).is_some() {
+                if associated_items
+                    .find_by_name_and_kind(
+                        cx.tcx,
+                        Ident::from_str("ensure_permissions"),
+                        AssocKind::Fn,
+                        item.owner_id.to_def_id(),
+                    )
+                    .is_some()
+                {
                     return;
                 }
             }
