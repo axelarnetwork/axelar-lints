@@ -1,7 +1,5 @@
 [workspace]
-members = [
-    "amplifier-lints",
-]
+members = ["amplifier-lints"]
 resolver = "2"
 
 [workspace.dependencies]
