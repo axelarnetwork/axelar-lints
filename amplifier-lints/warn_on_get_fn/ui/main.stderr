@@ -8,5 +8,5 @@ LL | | }
    |
    = note: `#[warn(warn_on_get_fn)]` on by default
 
-warning: 1 warning emitte
+warning: 1 warning emitted
 
