@@ -1,21 +1,25 @@
-# template
-
 ### What it does
+
+Warns on any functions that start with `get_`.
 
 ### Why is this bad?
 
-### Known problems
+It's convention to install call the function what you're trying to get directly.
 
-Remove if none.
+### Known problems
 
 ### Example
 
 ```rust
-// example code where a warning is issued
+fn get_some_val() {
+    // get some val
+}
 ```
 
 Use instead:
 
 ```rust
-// example code that does not raise a warning
+fn some_val() {
+    // get some val
+}
 ```
