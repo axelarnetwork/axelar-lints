@@ -23,7 +23,7 @@ Combined libraries can contain a number of your lints. They have [a number of re
 
 Here are some resources for creating lints:
 - Dylint has some [good example lints](https://github.com/trailofbits/dylint/tree/master/examples) that can help you get a good feel for how lints work.
-- Starting from [LateLintPass in the rust docs](https://doc.rust-lang.org/stable/nightly-rustc/rustc_lint/trait.LateLintPass.html) and searching for functions in the rust docs can help in finding specific functionality for linting.
+- Starting from [LateLintPass in the rust docs](https://doc.rust-lang.org/1.88.0/nightly-rustc/rustc_lint/trait.LateLintPass.html) and searching for functions in the rust docs can help in finding specific functionality for linting.
 
 ### Running Dylint on Target Workspaces 
 
