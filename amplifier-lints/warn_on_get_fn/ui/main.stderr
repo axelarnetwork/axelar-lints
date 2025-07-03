@@ -1,0 +1,12 @@
+warning: functions should not start with `get_`
+  --> $DIR/main.rs:1:1
+   |
+LL | / fn get_some_val() {
+LL | |     // get some val
+LL | | }
+   | |_^
+   |
+   = note: `#[warn(warn_on_get_fn)]` on by default
+
+warning: 1 warning emitted
+
