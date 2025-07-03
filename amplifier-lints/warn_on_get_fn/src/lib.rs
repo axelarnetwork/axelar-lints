@@ -5,9 +5,9 @@
 extern crate rustc_ast;
 extern crate rustc_span;
 
-use rustc_lint::{EarlyLintPass, EarlyContext, LintContext};
 use rustc_ast::{visit::FnKind, NodeId};
-use rustc_span::{Span};
+use rustc_lint::{EarlyContext, EarlyLintPass, LintContext};
+use rustc_span::Span;
 
 dylint_linting::declare_early_lint! {
     pub WARN_ON_GET_FN,
