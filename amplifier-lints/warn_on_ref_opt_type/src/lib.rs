@@ -2,29 +2,10 @@
 #![feature(let_chains)]
 #![warn(unused_extern_crates)]
 
-extern crate rustc_arena;
-extern crate rustc_ast;
-extern crate rustc_ast_pretty;
-extern crate rustc_data_structures;
-extern crate rustc_errors;
 extern crate rustc_hir;
-extern crate rustc_hir_pretty;
-extern crate rustc_index;
-extern crate rustc_infer;
-extern crate rustc_lexer;
-extern crate rustc_middle;
-extern crate rustc_mir_dataflow;
-extern crate rustc_parse;
-extern crate rustc_span;
-extern crate rustc_target;
-extern crate rustc_trait_selection;
 
-use std::option;
-
+use rustc_hir::{def::Res, AmbigArg, QPath, Ty, TyKind};
 use rustc_lint::{LateContext, LateLintPass, LintContext};
-use rustc_hir::{Ty, AmbigArg, TyKind, QPath, def::Res};
-use rustc_middle::ty;
-use rustc_span::sym;
 
 dylint_linting::declare_late_lint! {
     pub WARN_ON_REF_OPT_TYPE,

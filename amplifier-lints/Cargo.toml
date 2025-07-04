@@ -17,8 +17,8 @@ crate-type = ["cdylib"]
 dylint_linting = { workspace = true }
 ensure_msg_has_permissions = { path = "ensure_msg_has_permissions", features = ["rlib"] }
 restrict_cosmwasm_addr_in_msg_struct = { path = "restrict_cosmwasm_addr_in_msg_struct", features = ["rlib"] }
-warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
 warn_on_ref_opt_type = { path = "warn_on_ref_opt_type", features = ["rlib"] }
+warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
 
 [dev-dependencies]
 dylint_testing = { workspace = true }
