@@ -13,4 +13,5 @@ pub fn register_lints(sess: &rustc_session::Session, lint_store: &mut rustc_lint
     msg_without_explicit_permissions::register_lints(sess, lint_store);
     cosmwasm_addr_in_msg_struct::register_lints(sess, lint_store);
     get_fn::register_lints(sess, lint_store);
+    warn_on_ref_opt_type::register_lints(sess, lint_store);
 }

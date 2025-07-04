@@ -15,6 +15,7 @@ dylint_linting = { workspace = true }
 get_fn = { path = "get_fn", features = ["rlib"] }
 msg_without_explicit_permissions = { path = "msg_without_explicit_permissions", features = ["rlib"] }
 warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
+warn_on_ref_opt_type = { path = "warn_on_ref_opt_type", features = ["rlib"] }
 
 [dev-dependencies]
 dylint_testing = { workspace = true }
