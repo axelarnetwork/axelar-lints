@@ -1,4 +1,4 @@
-warning: all ExecuteMsg enums should derive `EnsurePermissions`
+warning: all ExecuteMsg enums should derive `Permissions`
   --> $DIR/main.rs:1:1
    |
 LL | / enum ExecuteMsg {
