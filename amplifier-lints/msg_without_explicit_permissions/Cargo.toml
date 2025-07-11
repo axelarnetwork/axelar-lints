@@ -10,10 +10,10 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-dylint_linting = "4.1.0"
+dylint_linting = { workspace = true }
 
 [dev-dependencies]
-dylint_testing = "4.1.0"
+dylint_testing = { workspace = true }
 
 [features]
 rlib = ["dylint_linting/constituent"]
