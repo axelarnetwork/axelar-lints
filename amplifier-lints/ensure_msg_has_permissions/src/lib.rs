@@ -14,7 +14,7 @@ use rustc_span::symbol::Ident;
 dylint_linting::declare_late_lint! {
     pub ENSURE_MSG_HAS_PERMISSIONS,
     Warn,
-    "warns if any ExecuteMsg has no `#[derive(EnsurePermissions)]`"
+    "warns if any ExecuteMsg has no `#[derive(Permissions)]`"
 }
 
 impl<'tcx> LateLintPass<'tcx> for EnsureMsgHasPermissions {
@@ -43,7 +43,7 @@ impl<'tcx> LateLintPass<'tcx> for EnsureMsgHasPermissions {
             }
 
             cx.span_lint(ENSURE_MSG_HAS_PERMISSIONS, item.span, |diag| {
-                diag.primary_message("all ExecuteMsg enums should derive `EnsurePermissions`");
+                diag.primary_message("all ExecuteMsg enums should derive `Permissions`");
             });
         }
     }

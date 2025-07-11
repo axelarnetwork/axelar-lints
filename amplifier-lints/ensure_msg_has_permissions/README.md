@@ -1,10 +1,10 @@
 ### What it does
 
-Checks whether an `ExecuteMsg` enum is annotated with `#[derive(EnsurePermissions)]`.
+Checks whether an `ExecuteMsg` enum is annotated with `#[derive(Permissions)]`.
 
 ### Why is this bad?
 
-Without deriving `EnsurePermissions`, permission checks can be skipped for `ExecuteMsg` -- unsafe.
+Without deriving `Permissions`, permission checks can be skipped for `ExecuteMsg` -- unsafe.
 
 ### Known problems
 
@@ -21,7 +21,7 @@ Use instead:
 
 ```rust
 #[cw_serde]
-#[derive(EnsurePermissions)]
+#[derive(Permissions)]
 enum ExecuteMsg {
     ...
 }
