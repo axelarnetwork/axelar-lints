@@ -15,10 +15,10 @@ dependencies = [
 name = "amplifier_lints"
 version = "0.1.0"
 dependencies = [
+ "cosmwasm_addr_in_msg_struct",
  "dylint_linting",
  "dylint_testing",
- "ensure_msg_has_permissions",
- "restrict_cosmwasm_addr_in_msg_struct",
+ "msg_without_explicit_permissions",
  "warn_on_unwraps",
 ]
 
@@ -190,6 +190,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "cosmwasm_addr_in_msg_struct"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
+]
+
+[[package]]
 name = "cpufeatures"
 version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -328,14 +336,6 @@ dependencies = [
  "regex",
  "serde_json",
  "tempfile",
-]
-
-[[package]]
-name = "ensure_msg_has_permissions"
-version = "0.1.0"
-dependencies = [
- "dylint_linting",
- "dylint_testing",
 ]
 
 [[package]]
@@ -761,6 +761,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "msg_without_explicit_permissions"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
+]
+
+[[package]]
 name = "num_cpus"
 version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -920,14 +928,6 @@ name = "regex-syntax"
 version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
-
-[[package]]
-name = "restrict_cosmwasm_addr_in_msg_struct"
-version = "0.1.0"
-dependencies = [
- "dylint_linting",
- "dylint_testing",
-]
 
 [[package]]
 name = "rust-embed"
