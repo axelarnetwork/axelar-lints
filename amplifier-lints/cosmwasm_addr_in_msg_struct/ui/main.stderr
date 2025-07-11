@@ -7,7 +7,7 @@ LL | |     // other variants
 LL | | }
    | |_^
    |
-   = note: `#[warn(restrict_cosmwasm_addr_in_msg_struct)]` on by default
+   = note: `#[warn(cosmwasm_addr_in_msg_struct)]` on by default
 
 warning: no msg types should use cosmwasm::Addr
   --> $DIR/main.rs:13:1

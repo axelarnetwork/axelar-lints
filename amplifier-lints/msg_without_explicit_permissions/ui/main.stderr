@@ -6,7 +6,7 @@ LL | |
 LL | | }
    | |_^
    |
-   = note: `#[warn(ensure_msg_has_permissions)]` on by default
+   = note: `#[warn(msg_without_explicit_permissions)]` on by default
 
 warning: 1 warning emitted
 

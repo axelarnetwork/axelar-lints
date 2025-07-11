@@ -10,6 +10,6 @@ extern crate rustc_session;
 #[unsafe(no_mangle)]
 pub fn register_lints(sess: &rustc_session::Session, lint_store: &mut rustc_lint::LintStore) {
     warn_on_unwraps::register_lints(sess, lint_store);
-    ensure_msg_has_permissions::register_lints(sess, lint_store);
-    restrict_cosmwasm_addr_in_msg_struct::register_lints(sess, lint_store);
+    msg_without_explicit_permissions::register_lints(sess, lint_store);
+    cosmwasm_addr_in_msg_struct::register_lints(sess, lint_store);
 }

@@ -1,5 +1,5 @@
 [package]
-name = "ensure_msg_has_permissions"
+name = "msg_without_explicit_permissions"
 version = "0.1.0"
 authors = ["authors go here"]
 description = "description goes here"
@@ -10,10 +10,10 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-dylint_linting = "4.1.0"
+dylint_linting = { workspace = true }
 
 [dev-dependencies]
-dylint_testing = "4.1.0"
+dylint_testing = { workspace = true }
 
 [features]
 rlib = ["dylint_linting/constituent"]

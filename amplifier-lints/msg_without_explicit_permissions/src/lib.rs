@@ -12,12 +12,12 @@ use rustc_middle::ty::AssocKind;
 use rustc_span::symbol::Ident;
 
 dylint_linting::declare_late_lint! {
-    pub ENSURE_MSG_HAS_PERMISSIONS,
+    pub MSG_WITHOUT_EXPLICIT_PERMISSIONS,
     Warn,
     "warns if any ExecuteMsg has no `#[derive(Permissions)]`"
 }
 
-impl<'tcx> LateLintPass<'tcx> for EnsureMsgHasPermissions {
+impl<'tcx> LateLintPass<'tcx> for MsgWithoutExplicitPermissions {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx Item<'tcx>) {
         if let ItemKind::Enum(..) = item.kind {
             let ident = cx.tcx.item_ident(item.owner_id.into());
@@ -42,7 +42,7 @@ impl<'tcx> LateLintPass<'tcx> for EnsureMsgHasPermissions {
                 }
             }
 
-            cx.span_lint(ENSURE_MSG_HAS_PERMISSIONS, item.span, |diag| {
+            cx.span_lint(MSG_WITHOUT_EXPLICIT_PERMISSIONS, item.span, |diag| {
                 diag.primary_message("all ExecuteMsg enums should derive `Permissions`");
             });
         }
