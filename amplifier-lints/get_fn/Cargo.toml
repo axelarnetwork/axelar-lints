@@ -1,5 +1,5 @@
 [package]
-name = "warn_on_get_fn"
+name = "get_fn"
 version = "0.1.0"
 authors = ["authors go here"]
 description = "description goes here"

@@ -10,17 +10,17 @@ use rustc_lint::{EarlyContext, EarlyLintPass, LintContext};
 use rustc_span::Span;
 
 dylint_linting::declare_early_lint! {
-    pub WARN_ON_GET_FN,
+    pub GET_FN,
     Warn,
     "no functions should start with `get_`"
 }
 
-impl EarlyLintPass for WarnOnGetFn {
+impl EarlyLintPass for GetFn {
     fn check_fn(&mut self, cx: &EarlyContext, fn_kind: FnKind, span: Span, _: NodeId) {
         if let FnKind::Fn(_, _, fn_data) = fn_kind {
             let name = fn_data.ident.name.as_str();
             if name.starts_with("get_") {
-                cx.span_lint(WARN_ON_GET_FN, span, |diag| {
+                cx.span_lint(GET_FN, span, |diag| {
                     diag.primary_message("functions should not start with `get_`");
                 });
             }

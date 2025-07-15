@@ -6,7 +6,7 @@ LL | |     // get some val
 LL | | }
    | |_^
    |
-   = note: `#[warn(warn_on_get_fn)]` on by default
+   = note: `#[warn(get_fn)]` on by default
 
 warning: 1 warning emitted
 

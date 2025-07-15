@@ -18,8 +18,8 @@ dependencies = [
  "cosmwasm_addr_in_msg_struct",
  "dylint_linting",
  "dylint_testing",
+ "get_fn",
  "msg_without_explicit_permissions",
- "warn_on_get_fn",
  "warn_on_unwraps",
 ]
 
@@ -413,6 +413,14 @@ checksum = "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a"
 dependencies = [
  "typenum",
  "version_check",
+]
+
+[[package]]
+name = "get_fn"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
 ]
 
 [[package]]
@@ -1320,14 +1328,6 @@ checksum = "29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b"
 dependencies = [
  "same-file",
  "winapi-util",
-]
-
-[[package]]
-name = "warn_on_get_fn"
-version = "0.1.0"
-dependencies = [
- "dylint_linting",
- "dylint_testing",
 ]
 
 [[package]]
