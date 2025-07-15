@@ -29,31 +29,28 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
         span: Span,
         _local_def_id: LocalDefId,
     ) {
-        match fn_kind {
-            FnKind::ItemFn(ident, ..) => {
-                if ident.name.as_str() != "execute" {
-                    return;
-                }
-
-                let is_contract_rs_execute = is_contract_rs_execute(cx, span);
-
-                if !is_contract_rs_execute {
-                    return;
-                }
-
-                let has_permissions_match = has_match_on_permissions(cx, body);
-
-                if has_permissions_match {
-                    cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
-                        diag.primary_message("good!");
-                    });
-                } else {
-                    cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
-                        diag.primary_message("bad!");
-                    });
-                }
+        if let FnKind::ItemFn(ident, ..) = fn_kind {
+            if ident.name.as_str() != "execute" {
+                return;
             }
-            _ => {}
+
+            let is_contract_rs_execute = is_contract_rs_execute(cx, span);
+
+            if !is_contract_rs_execute {
+                return;
+            }
+
+            let has_permissions_match = has_match_on_permissions(cx, body);
+
+            if has_permissions_match {
+                cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
+                    diag.primary_message("good!");
+                });
+            } else {
+                cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
+                    diag.primary_message("bad!");
+                });
+            }
         }
     }
 }
