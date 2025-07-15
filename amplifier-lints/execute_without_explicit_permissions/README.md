@@ -1,21 +1,30 @@
-# template
-
 ### What it does
+
+Checks whether a `execute` entry point (currently any `execute` function in `contract.rs`) matches on `ensure_permissions` within the body.
 
 ### Why is this bad?
 
-### Known problems
+Without checking permissions, it is unsafe.
 
-Remove if none.
+### Known problems
 
 ### Example
 
 ```rust
-// example code where a warning is issued
+// in a contract.rs file
+pub fn execute(..) {
+    match msg {
+        ..
+    }
+}
 ```
 
 Use instead:
 
 ```rust
-// example code that does not raise a warning
-```
+// in a contract.rs file
+pub fn execute(..) {
+    match msg.ensure_permissions(..) {
+        ..
+    }
+}```
