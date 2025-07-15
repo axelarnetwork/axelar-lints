@@ -24,7 +24,7 @@ Use instead:
 ```rust
 // in a contract.rs file
 pub fn execute(..) {
-    match msg.ensure_permissions(..) {
+    match msg.ensure_permissions(..)? {
         ..
     }
 }```
