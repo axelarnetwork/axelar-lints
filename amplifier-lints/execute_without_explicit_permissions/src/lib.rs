@@ -2,14 +2,16 @@
 #![feature(let_chains)]
 #![warn(unused_extern_crates)]
 
-extern crate rustc_ast;
 extern crate rustc_hir;
 extern crate rustc_span;
 
-use rustc_ast::tokenstream::TokenTree;
+use rustc_hir::{
+    intravisit::FnKind,
+    intravisit::{self, Visitor},
+    Body, ExprKind, FnDecl,
+};
 use rustc_lint::{LateContext, LateLintPass, LintContext};
-use rustc_hir::{intravisit::FnKind, FnDecl, Body, Attribute, AttrArgs, ExprKind, intravisit::{self, Visitor}};
-use rustc_span::{Span, def_id::LocalDefId};
+use rustc_span::{def_id::LocalDefId, FileName, RealFileName, Span};
 
 dylint_linting::declare_late_lint! {
     pub EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS,
@@ -25,7 +27,7 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
         _fn_decl: &'tcx FnDecl<'tcx>,
         body: &'tcx Body<'tcx>,
         span: Span,
-        local_def_id: LocalDefId,
+        _local_def_id: LocalDefId,
     ) {
         match fn_kind {
             FnKind::ItemFn(ident, ..) => {
@@ -33,10 +35,9 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
                     return;
                 }
 
-                let attrs = cx.tcx.get_all_attrs(local_def_id.to_def_id());
-                let is_entry_point = is_entry_point(attrs);
+                let is_contract_rs_execute = is_contract_rs_execute(cx, span);
 
-                if !is_entry_point {
+                if !is_contract_rs_execute {
                     return;
                 }
 
@@ -57,38 +58,16 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
     }
 }
 
-fn is_entry_point<'a, I>(attrs: I) -> bool
-where
-    I: Iterator<Item = &'a Attribute>,
-{
-    for attr in attrs {
-        // println!("{:#?}", attr);
-        if let Attribute::Unparsed(b_attr_item) = attr {
-            let attr_item = &b_attr_item;
+fn is_contract_rs_execute(cx: &LateContext<'_>, span: Span) -> bool {
+    let source_map = cx.tcx.sess.source_map();
+    let file_name = source_map.span_to_filename(span);
 
-            let is_cfg_attr = if let Some(ident) = &attr_item.path.segments.get(0) {
-                ident.name.as_str() == "<cfg_attr>"
-            } else {
-                false
-            };
-
-            if !is_cfg_attr {
-                continue;
-            }
-
-            if let AttrArgs::Delimited(delim_args) = &attr_item.args {
-                for token_kind in delim_args.tokens.iter() {
-                    if let TokenTree::Token(token, _) = token_kind {
-                        if let Some((ident, _)) = token.ident() {
-                            if ident.name.as_str() == "entry_point" {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
+    if let FileName::Real(RealFileName::LocalPath(path)) = file_name {
+        if path.ends_with("contract.rs") {
+            return true;
         }
     }
+
     false
 }
 
@@ -115,12 +94,7 @@ impl<'tcx> Visitor<'tcx> for MatchVisitor {
     }
 }
 
-fn has_match_on_permissions(
-    _cx: &LateContext<'_>,
-    body: &Body<'_>,
-) -> bool {
-    // println!("{:#?}", body);
-
+fn has_match_on_permissions(_cx: &LateContext<'_>, body: &Body<'_>) -> bool {
     let mut mv = MatchVisitor { has_match: false };
 
     intravisit::walk_body(&mut mv, body);
