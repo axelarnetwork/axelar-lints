@@ -4,7 +4,7 @@ warning: use `Option<&T>` instead
 LL | fn opt_test(x: &Option<u8>) {}
    |                ^^^^^^^^^^^
    |
-   = note: `#[warn(warn_on_ref_opt_type)]` on by default
+   = note: `#[warn(ref_opt_type)]` on by default
 
 warning: 1 warning emitted
 

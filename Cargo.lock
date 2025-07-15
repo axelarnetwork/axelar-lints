@@ -20,7 +20,11 @@ dependencies = [
  "dylint_testing",
  "get_fn",
  "msg_without_explicit_permissions",
+<<<<<<< HEAD
  "warn_on_ref_opt_type",
+=======
+ "ref_opt_type",
+>>>>>>> b7b6338 (rename)
  "warn_on_unwraps",
 ]
 
@@ -911,6 +915,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "ref_opt_type"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
+]
+
+[[package]]
 name = "regex"
 version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1329,14 +1341,6 @@ checksum = "29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b"
 dependencies = [
  "same-file",
  "winapi-util",
-]
-
-[[package]]
-name = "warn_on_ref_opt_type"
-version = "0.1.0"
-dependencies = [
- "dylint_linting",
- "dylint_testing",
 ]
 
 [[package]]

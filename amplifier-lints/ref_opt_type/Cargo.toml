@@ -1,5 +1,5 @@
 [package]
-name = "warn_on_ref_opt_type"
+name = "ref_opt_type"
 version = "0.1.0"
 authors = ["authors go here"]
 description = "description goes here"
