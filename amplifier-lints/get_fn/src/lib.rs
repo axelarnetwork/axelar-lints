@@ -21,7 +21,7 @@ impl EarlyLintPass for GetFn {
             let name = fn_data.ident.name.as_str();
             if name.starts_with("get_") {
                 cx.span_lint(GET_FN, span, |diag| {
-                    diag.primary_message("functions should not start with `get_`");
+                    diag.primary_message("getter functions should omit the `get_` prefix");
                 });
             }
         }
