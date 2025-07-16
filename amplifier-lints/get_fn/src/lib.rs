@@ -5,7 +5,7 @@
 extern crate rustc_ast;
 extern crate rustc_span;
 
-use rustc_ast::{visit::FnKind, NodeId};
+use rustc_ast::{NodeId, visit::FnKind};
 use rustc_lint::{EarlyContext, EarlyLintPass, LintContext};
 use rustc_span::Span;
 
