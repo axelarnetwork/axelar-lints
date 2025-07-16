@@ -4,7 +4,7 @@
 
 extern crate rustc_hir;
 
-use rustc_hir::{def::Res, AmbigArg, QPath, Ty, TyKind};
+use rustc_hir::{AmbigArg, QPath, Ty, TyKind, def::Res};
 use rustc_lint::{LateContext, LateLintPass, LintContext};
 
 dylint_linting::declare_late_lint! {
@@ -18,12 +18,11 @@ impl<'tcx> LateLintPass<'tcx> for RefOptType {
         if let TyKind::Ref(_, inner_ty) = ty.kind
             && let TyKind::Path(QPath::Resolved(_, path)) = inner_ty.ty.kind
             && let Res::Def(_, def_id) = path.res
+            && Some(def_id) == cx.tcx.lang_items().option_type()
         {
-            if Some(def_id) == cx.tcx.lang_items().option_type() {
-                cx.span_lint(REF_OPT_TYPE, ty.span, |diag| {
-                    diag.primary_message("use `Option<&T>` instead");
-                });
-            }
+            cx.span_lint(REF_OPT_TYPE, ty.span, |diag| {
+                diag.primary_message("use `Option<&T>` instead");
+            });
         }
     }
 }
