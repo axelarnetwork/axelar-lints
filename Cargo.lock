@@ -18,6 +18,7 @@ dependencies = [
  "cosmwasm_addr_in_msg_struct",
  "dylint_linting",
  "dylint_testing",
+ "get_fn",
  "msg_without_explicit_permissions",
  "warn_on_unwraps",
 ]
@@ -412,6 +413,14 @@ checksum = "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a"
 dependencies = [
  "typenum",
  "version_check",
+]
+
+[[package]]
+name = "get_fn"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
 ]
 
 [[package]]
