@@ -4,7 +4,7 @@ Warns on any `&Option<T>`.
 
 ### Why is this bad?
 
-`Option<&T>` is clearer and can be used easier.
+`Option<&T>` is more flexible, provides better pattern matching capabilities, and allows more compiler optimizations.
 
 ### Known problems
 

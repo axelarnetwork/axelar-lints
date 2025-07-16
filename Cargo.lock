@@ -20,11 +20,7 @@ dependencies = [
  "dylint_testing",
  "get_fn",
  "msg_without_explicit_permissions",
-<<<<<<< HEAD
- "warn_on_ref_opt_type",
-=======
  "ref_opt_type",
->>>>>>> b7b6338 (rename)
  "warn_on_unwraps",
 ]
 
