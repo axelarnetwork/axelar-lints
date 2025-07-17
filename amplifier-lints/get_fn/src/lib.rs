@@ -25,17 +25,16 @@ impl<'tcx> LateLintPass<'tcx> for GetFn {
     fn check_impl_item(&mut self, cx: &LateContext<'tcx>, impl_item: &'tcx ImplItem<'tcx>) {
         let parent_id = cx.tcx.hir_get_parent_item(impl_item.hir_id());
         let parent_item = cx.tcx.hir_expect_item(parent_id.def_id);
-        if let ItemKind::Impl(parent_item) = parent_item.kind
-            && parent_item.of_trait.is_none()
+        if let ItemKind::Impl(parent_impl_item) = parent_item.kind
+            && parent_impl_item.of_trait.is_none()
+            && matches!(impl_item.kind, ImplItemKind::Fn(..))
         {
-            if let ImplItemKind::Fn(..) = impl_item.kind {
-                check_fn_name(cx, impl_item.ident);
-            }
+            check_fn_name(cx, impl_item.ident);
         }
     }
 
     fn check_trait_item(&mut self, cx: &LateContext<'tcx>, trait_item: &'tcx TraitItem<'tcx>) {
-        if let TraitItemKind::Fn(..) = trait_item.kind {
+        if matches!(trait_item.kind, TraitItemKind::Fn(..)) {
             check_fn_name(cx, trait_item.ident);
         }
     }
