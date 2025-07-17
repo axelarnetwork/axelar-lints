@@ -24,8 +24,8 @@ impl<'tcx> LateLintPass<'tcx> for GetFn {
 
     fn check_impl_item(&mut self, cx: &LateContext<'tcx>, impl_item: &'tcx ImplItem<'tcx>) {
         let parent_id = cx.tcx.hir_get_parent_item(impl_item.hir_id());
-        let parent_local_def_id = parent_id.to_def_id().expect_local();
-        if let ItemKind::Impl(parent_item) = cx.tcx.hir_expect_item(parent_local_def_id).kind
+        let parent_item = cx.tcx.hir_expect_item(parent_id.def_id);
+        if let ItemKind::Impl(parent_item) = parent_item.kind
             && parent_item.of_trait.is_none()
         {
             if let ImplItemKind::Fn(..) = impl_item.kind {
