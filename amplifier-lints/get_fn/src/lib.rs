@@ -5,7 +5,10 @@
 extern crate rustc_ast;
 extern crate rustc_span;
 
-use rustc_ast::{NodeId, visit::FnKind};
+use rustc_ast::{
+    NodeId,
+    visit::{AssocCtxt, FnCtxt, FnKind},
+};
 use rustc_lint::{EarlyContext, EarlyLintPass, LintContext};
 use rustc_span::Span;
 
@@ -17,7 +20,9 @@ dylint_linting::declare_early_lint! {
 
 impl EarlyLintPass for GetFn {
     fn check_fn(&mut self, cx: &EarlyContext, fn_kind: FnKind, span: Span, _: NodeId) {
-        if let FnKind::Fn(_, _, fn_data) = fn_kind {
+        if let FnKind::Fn(fn_ctxt, _, fn_data) = fn_kind
+            && (FnCtxt::Free == fn_ctxt || FnCtxt::Assoc(AssocCtxt::Trait) == fn_ctxt)
+        {
             let name = fn_data.ident.name.as_str();
             if name.starts_with("get_") {
                 cx.span_lint(GET_FN, span, |diag| {

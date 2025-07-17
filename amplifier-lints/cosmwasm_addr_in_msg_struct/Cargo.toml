@@ -1,10 +1,7 @@
 [package]
 name = "cosmwasm_addr_in_msg_struct"
 version = "0.1.0"
-authors = ["authors go here"]
-description = "description goes here"
-edition = "2021"
-publish = false
+edition = "2024"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
