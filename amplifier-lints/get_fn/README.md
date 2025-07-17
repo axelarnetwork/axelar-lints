@@ -14,6 +14,16 @@ It's idiomatic in Rust to omit the `get_` prefix for getter functions.
 fn get_some_val() {
     // get some val
 }
+
+impl Foo {
+    fn get_foo(&self) {
+        // get some foo val
+    }
+}
+
+trait FooTrait {
+    fn get_foo_trait(&self);
+}
 ```
 
 Use instead:
@@ -21,5 +31,15 @@ Use instead:
 ```rust
 fn some_val() {
     // get some val
+}
+
+impl Foo {
+    fn foo(&self) {
+        // get some foo val
+    }
+}
+
+trait FooTrait {
+    fn foo_trait(&self);
 }
 ```

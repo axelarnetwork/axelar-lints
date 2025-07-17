@@ -6,5 +6,17 @@ LL | fn get_some_val() {
    |
    = note: `#[warn(get_fn)]` on by default
 
-warning: 1 warning emitted
+warning: getter functions should omit the `get_` prefix
+  --> $DIR/main.rs:10:8
+   |
+LL |     fn get_foo(&self) {
+   |        ^^^^^^^
+
+warning: getter functions should omit the `get_` prefix
+  --> $DIR/main.rs:16:8
+   |
+LL |     fn get_foo_trait(&self);
+   |        ^^^^^^^^^^^^^
+
+warning: 3 warnings emitted
 
