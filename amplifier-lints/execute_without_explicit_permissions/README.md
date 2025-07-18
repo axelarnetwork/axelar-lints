@@ -1,6 +1,6 @@
 ### What it does
 
-Checks whether a `execute` entry point (currently any `execute` function in `contract.rs`) matches on `ensure_permissions` within the body.
+Checks whether an `execute` entry point (currently any `execute` function in `contract.rs`) matches on `ensure_permissions` within the body.
 
 ### Why is this bad?
 
