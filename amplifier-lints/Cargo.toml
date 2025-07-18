@@ -14,6 +14,7 @@ cosmwasm_addr_in_msg_struct = { path = "cosmwasm_addr_in_msg_struct", features =
 dylint_linting = { workspace = true }
 get_fn = { path = "get_fn", features = ["rlib"] }
 msg_without_explicit_permissions = { path = "msg_without_explicit_permissions", features = ["rlib"] }
+ref_opt_type = { path = "ref_opt_type", features = ["rlib"] }
 warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
 
 [dev-dependencies]

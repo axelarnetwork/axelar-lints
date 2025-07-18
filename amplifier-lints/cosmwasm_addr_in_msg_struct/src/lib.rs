@@ -11,7 +11,7 @@ use rustc_lint::{LateContext, LateLintPass, LintContext};
 dylint_linting::declare_late_lint! {
     pub COSMWASM_ADDR_IN_MSG_STRUCT,
     Warn,
-    "avoid using cosmwasm::Addr in msg typesi"
+    "avoid using cosmwasm::Addr in msg types"
 }
 
 impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
