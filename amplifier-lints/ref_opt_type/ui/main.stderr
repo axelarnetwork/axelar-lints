@@ -1,4 +1,4 @@
-warning: use `Option<&T>` instead
+warning: use `Option<&u8>` instead
   --> $DIR/main.rs:1:16
    |
 LL | fn opt_test(x: &Option<u8>) {}
