@@ -1,5 +1,3 @@
-enum ExecuteMsg {
-
-}
+enum ExecuteMsg {}
 
 fn main() {}
