@@ -49,5 +49,5 @@ fn get_snippet(cx: &LateContext<'_>, span: Span) -> Option<String> {
 
 #[test]
 fn ui() {
-    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "tests");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_tests");
 }

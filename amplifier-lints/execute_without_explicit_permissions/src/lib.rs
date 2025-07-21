@@ -96,6 +96,6 @@ fn has_match_on_permissions(_cx: &LateContext<'_>, body: &Body<'_>) -> bool {
 
 #[test]
 fn ui() {
-    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "succeed_test");
-    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "fail_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_fail_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_succeed_test");
 }
