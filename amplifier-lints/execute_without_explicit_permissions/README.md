@@ -2,6 +2,8 @@
 
 Checks whether an `execute` entry point (currently any `execute` function in `contract.rs`) matches on `ensure_permissions` within the body.
 
+TODO: make sure exact specification included (needs msg as last in sig)
+
 ### Why is this bad?
 
 Without checking permissions, it is unsafe.

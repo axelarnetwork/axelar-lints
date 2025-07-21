@@ -6,12 +6,12 @@ extern crate rustc_hir;
 extern crate rustc_span;
 
 use rustc_hir::{
-    Body, ExprKind, FnDecl,
+    Body, ExprKind, FnDecl, PatKind, QPath,
     intravisit::FnKind,
     intravisit::{self, Visitor},
 };
 use rustc_lint::{LateContext, LateLintPass, LintContext};
-use rustc_span::{FileName, RealFileName, Span, def_id::LocalDefId};
+use rustc_span::{FileName, RealFileName, Span, def_id::LocalDefId, symbol::Ident};
 
 dylint_linting::declare_late_lint! {
     pub EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS,
@@ -55,22 +55,20 @@ fn is_contract_rs_execute(cx: &LateContext<'_>, span: Span) -> bool {
 }
 
 struct PermissionMatchVisitor {
+    msg_ident: Ident,
     has_match: bool,
 }
 
 impl<'tcx> Visitor<'tcx> for PermissionMatchVisitor {
     fn visit_expr(&mut self, expr: &'tcx rustc_hir::Expr<'tcx>) {
-        if let ExprKind::Match(match_inner, _, _) = expr.kind {
-            if let ExprKind::Call(_, args) = match_inner.kind {
-                for arg in args {
-                    if let ExprKind::MethodCall(path_segment, _, _, _) = arg.kind {
-                        if path_segment.ident.name.as_str() == "ensure_permissions" {
-                            self.has_match = true;
-                            return;
-                        }
-                    }
-                }
-            }
+        if let ExprKind::MethodCall(expr_path, receiver_expr, _, _) = expr.kind
+            && expr_path.ident.name.as_str() == "ensure_permissions"
+            && let ExprKind::Path(QPath::Resolved(_, receiver_path)) = receiver_expr.kind
+            && let Some(receiver_seg) = receiver_path.segments.last()
+            && receiver_seg.ident == self.msg_ident
+        {
+            self.has_match = true;
+            return;
         }
 
         intravisit::walk_expr(self, expr);
@@ -78,12 +76,19 @@ impl<'tcx> Visitor<'tcx> for PermissionMatchVisitor {
 }
 
 fn has_match_on_permissions(_cx: &LateContext<'_>, body: &Body<'_>) -> bool {
-    let mut mv = PermissionMatchVisitor { has_match: false };
+    if let Some(last_param) = body.params.last()
+        && let PatKind::Binding(_, _, msg_ident, _) = last_param.pat.kind
+    {
+        let mut mv = PermissionMatchVisitor {
+            msg_ident,
+            has_match: false,
+        };
 
-    intravisit::walk_body(&mut mv, body);
+        intravisit::walk_body(&mut mv, body);
 
-    if mv.has_match {
-        return true;
+        if mv.has_match {
+            return true;
+        }
     }
 
     false
