@@ -16,7 +16,7 @@ use rustc_span::{FileName, RealFileName, Span, def_id::LocalDefId, symbol::Ident
 dylint_linting::declare_late_lint! {
     pub EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS,
     Warn,
-    "All contract.rs execute entry points should have explicit permissions checks"
+    "All contract.rs execute entry points should have explicit permissions checks on `msg.ensure_permissions`"
 }
 
 impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
@@ -35,7 +35,7 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
             && !has_match_on_permissions(cx, body)
         {
             cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
-                diag.primary_message("no permissions check found in execute entry point");
+                diag.primary_message("no `msg.ensure_permissions` found in execute entry point");
             });
         }
     }
