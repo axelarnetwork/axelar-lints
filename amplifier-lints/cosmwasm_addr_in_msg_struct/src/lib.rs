@@ -78,5 +78,5 @@ fn check_cosmwasm_addr_in_field(cx: &LateContext, fields: &[FieldDef]) -> bool {
 
 #[test]
 fn ui() {
-    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "tests");
 }

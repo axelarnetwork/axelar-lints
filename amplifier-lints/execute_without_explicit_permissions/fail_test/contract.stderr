@@ -1,0 +1,10 @@
+warning: no `msg.ensure_permissions` found in execute entry point
+  --> $DIR/contract.rs:1:1
+   |
+LL | fn execute() {}
+   | ^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(execute_without_explicit_permissions)]` on by default
+
+warning: 1 warning emitted
+
