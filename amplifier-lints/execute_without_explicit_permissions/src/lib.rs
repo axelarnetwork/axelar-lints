@@ -5,11 +5,8 @@
 extern crate rustc_hir;
 extern crate rustc_span;
 
-use rustc_hir::{
-    Body, ExprKind, FnDecl, PatKind, QPath,
-    intravisit::FnKind,
-    intravisit::{self, Visitor},
-};
+use rustc_hir::intravisit::{FnKind, Visitor, walk_body, walk_expr};
+use rustc_hir::{Body, ExprKind, FnDecl, PatKind, QPath};
 use rustc_lint::{LateContext, LateLintPass, LintContext};
 use rustc_span::{FileName, RealFileName, Span, def_id::LocalDefId, symbol::Ident};
 
@@ -32,11 +29,22 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
         if let FnKind::ItemFn(ident, ..) = fn_kind
             && ident.name.as_str() == "execute"
             && is_contract_rs_execute(cx, span)
-            && !has_match_on_permissions(cx, body)
+            && let Some(last_param) = body.params.last()
         {
-            cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
-                diag.primary_message("no `msg.ensure_permissions` found in execute entry point");
-            });
+            if let PatKind::Binding(_, _, msg_ident, _) = last_param.pat.kind {
+                if !has_match_on_permissions(cx, body, msg_ident) {
+                    cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
+                        diag.primary_message(format!(
+                            "last parameter `{}` should be checked by `ensure_permissions`",
+                            msg_ident.name
+                        ));
+                    });
+                }
+            } else {
+                cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
+                    diag.primary_message("last parameter is not a `binding` pattern, expected to call `ensure_permission` on last parameter");
+                });
+            }
         }
     }
 }
@@ -71,24 +79,20 @@ impl<'tcx> Visitor<'tcx> for PermissionMatchVisitor {
             return;
         }
 
-        intravisit::walk_expr(self, expr);
+        walk_expr(self, expr);
     }
 }
 
-fn has_match_on_permissions(_cx: &LateContext<'_>, body: &Body<'_>) -> bool {
-    if let Some(last_param) = body.params.last()
-        && let PatKind::Binding(_, _, msg_ident, _) = last_param.pat.kind
-    {
-        let mut mv = PermissionMatchVisitor {
-            msg_ident,
-            has_match: false,
-        };
+fn has_match_on_permissions(_cx: &LateContext<'_>, body: &Body<'_>, msg_ident: Ident) -> bool {
+    let mut mv = PermissionMatchVisitor {
+        msg_ident,
+        has_match: false,
+    };
 
-        intravisit::walk_body(&mut mv, body);
+    walk_body(&mut mv, body);
 
-        if mv.has_match {
-            return true;
-        }
+    if mv.has_match {
+        return true;
     }
 
     false
@@ -96,6 +100,9 @@ fn has_match_on_permissions(_cx: &LateContext<'_>, body: &Body<'_>) -> bool {
 
 #[test]
 fn ui() {
-    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_fail_test");
-    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_succeed_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_empty_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_let_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_match_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_non_binding_test");
+    dylint_testing::ui_test(env!("CARGO_PKG_NAME"), "ui_unchecked_test");
 }
