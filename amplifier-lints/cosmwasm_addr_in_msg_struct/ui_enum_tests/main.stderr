@@ -1,0 +1,12 @@
+warning: no msg types should use cosmwasm::Addr
+  --> $DIR/main.rs:9:1
+   |
+LL | / enum InstantiateMsg {
+LL | |     Addr(Addr),
+LL | | }
+   | |_^
+   |
+   = note: `#[warn(cosmwasm_addr_in_msg_struct)]` on by default
+
+warning: 1 warning emitted
+

@@ -1,5 +1,5 @@
 warning: avoid using `unwrap` if possible
-  --> $DIR/main.rs:2:22
+  --> $DIR/main.rs:4:22
    |
 LL |     let _ = Some(42).unwrap();
    |                      ^^^^^^^^
@@ -7,7 +7,7 @@ LL |     let _ = Some(42).unwrap();
    = note: `#[warn(warn_on_unwraps)]` on by default
 
 warning: avoid using `unwrap` if possible
-  --> $DIR/main.rs:6:39
+  --> $DIR/main.rs:10:39
    |
 LL |     let _ = Result::<i32, ()>::Ok(42).unwrap();
    |                                       ^^^^^^^^
