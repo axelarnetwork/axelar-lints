@@ -1,5 +1,0 @@
-enum ExecuteMsg {
-
-}
-
-fn main() {}

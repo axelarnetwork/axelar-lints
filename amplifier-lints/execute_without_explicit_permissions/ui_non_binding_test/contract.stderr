@@ -1,0 +1,10 @@
+warning: last parameter is not a `binding` pattern, expected to call `ensure_permissions` on last parameter
+  --> $DIR/contract.rs:7:1
+   |
+LL | fn execute(_: Msg) {}
+   | ^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(execute_without_explicit_permissions)]` on by default
+
+warning: 1 warning emitted
+

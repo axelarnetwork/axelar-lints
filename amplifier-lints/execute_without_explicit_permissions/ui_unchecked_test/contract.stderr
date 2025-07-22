@@ -1,0 +1,10 @@
+warning: last parameter `unchecked_msg` should be checked by `ensure_permissions`
+  --> $DIR/contract.rs:7:1
+   |
+LL | fn execute(unchecked_msg: Msg) {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(execute_without_explicit_permissions)]` on by default
+
+warning: 1 warning emitted
+

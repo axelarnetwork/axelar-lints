@@ -18,6 +18,7 @@ dependencies = [
  "cosmwasm_addr_in_msg_struct",
  "dylint_linting",
  "dylint_testing",
+ "execute_without_explicit_permissions",
  "get_fn",
  "msg_without_explicit_permissions",
  "ref_opt_type",
@@ -377,6 +378,14 @@ checksum = "778e2ac28f6c47af28e4907f13ffd1e1ddbd400980a9abd7c8df189bf578a5ad"
 dependencies = [
  "libc",
  "windows-sys 0.60.2",
+]
+
+[[package]]
+name = "execute_without_explicit_permissions"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
 ]
 
 [[package]]

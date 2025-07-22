@@ -1,10 +1,8 @@
 warning: all ExecuteMsg enums should derive `Permissions`
   --> $DIR/main.rs:1:1
    |
-LL | / enum ExecuteMsg {
-LL | |
-LL | | }
-   | |_^
+LL | enum ExecuteMsg {}
+   | ^^^^^^^^^^^^^^^^^^
    |
    = note: `#[warn(msg_without_explicit_permissions)]` on by default
 

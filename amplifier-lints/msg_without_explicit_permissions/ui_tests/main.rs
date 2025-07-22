@@ -1,0 +1,3 @@
+enum ExecuteMsg {}
+
+fn main() {}
