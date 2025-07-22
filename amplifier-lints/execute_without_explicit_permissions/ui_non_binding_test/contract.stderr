@@ -1,4 +1,4 @@
-warning: last parameter is not a `binding` pattern, expected to call `ensure_permission` on last parameter
+warning: last parameter is not a `binding` pattern, expected to call `ensure_permissions` on last parameter
   --> $DIR/contract.rs:7:1
    |
 LL | fn execute(_: Msg) {}
