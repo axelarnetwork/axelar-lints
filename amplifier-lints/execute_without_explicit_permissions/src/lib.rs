@@ -42,7 +42,7 @@ impl<'tcx> LateLintPass<'tcx> for ExecuteWithoutExplicitPermissions {
                 }
             } else {
                 cx.span_lint(EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS, span, |diag| {
-                    diag.primary_message("last parameter is not a `binding` pattern, expected to call `ensure_permission` on last parameter");
+                    diag.primary_message("last parameter is not a `binding` pattern, expected to call `ensure_permissions` on last parameter");
                 });
             }
         }
