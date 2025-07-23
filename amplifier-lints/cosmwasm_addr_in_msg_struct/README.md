@@ -2,6 +2,16 @@
 
 Checks whether an `ExecuteMsg`, `QueryMsg`, `InstantiateMsg`, or `MigrateMsg` has a `cosmwasm_std::Addr` type in their fields.
 
+### How it works
+
+Checks `struct` definitions and `enum` definitions.
+
+For structs:
+- `InstantiateMsg` and `MigrateMsg` may be of this type. Checks the `ident` of the definition for its name; if it matches, checks the type of its fields for a `cosmwasm_std::Addr`.
+
+For enums:
+- `ExecuteMsg` and `QueryMsg` may be of this type. Checks the `ident` of the definition for its name; if it matches, checks the fields of each variant for a `cosmwasm_std::Addr`.
+
 ### Why is this bad?
 
 This is a validated type, but when the msg gets deserialized, the field is populated without that validation, so you could potentially introduce data that bypassed expected checks.

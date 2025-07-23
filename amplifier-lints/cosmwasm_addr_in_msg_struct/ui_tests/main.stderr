@@ -12,7 +12,7 @@ LL | | }
 warning: no msg types should use cosmwasm::Addr
   --> $DIR/main.rs:13:1
    |
-LL | / struct QueryMsg {
+LL | / struct InstantiateMsg {
 LL | |     addr: cosmwasm_std::Addr,
 LL | |     // other fields
 LL | | }

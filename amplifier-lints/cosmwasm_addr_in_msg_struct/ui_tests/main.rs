@@ -10,7 +10,7 @@ enum ExecuteMsg {
     // other variants
 }
 
-struct QueryMsg {
+struct InstantiateMsg {
     addr: cosmwasm_std::Addr,
     // other fields
 }
