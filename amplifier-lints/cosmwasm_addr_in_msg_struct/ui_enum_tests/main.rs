@@ -6,12 +6,12 @@ use cosmwasm_std::Addr;
 
 // expected result: linted
 // - is an enum with a cosmwasm::Addr variant
-enum InstantiateMsg {
+enum ExecuteMsg {
     Addr(Addr),
 }
 
 // expected result: not linted
 // - is an enum with no cosmwasm::Addr variant
-enum MigrateMsg {}
+enum QueryMsg {}
 
 fn main() {}

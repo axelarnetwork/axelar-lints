@@ -6,12 +6,12 @@ use cosmwasm_std::Addr;
 
 // expected result: linted
 // - is a struct with a cosmwasm::Addr field
-struct ExecuteMsg {
+struct InstantiateMsgMsg {
     addr: cosmwasm_std::Addr,
 }
 
 // expected result: not linted
 // - is a struct with no cosmwasm::Addr field
-struct QueryMsg {}
+struct MigrateMsg {}
 
 fn main() {}
