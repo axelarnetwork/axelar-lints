@@ -6,7 +6,7 @@ use cosmwasm_std::Addr;
 
 // expected result: linted
 // - is a struct with a cosmwasm::Addr field
-struct InstantiateMsgMsg {
+struct InstantiateMsg {
     addr: cosmwasm_std::Addr,
 }
 
