@@ -1,7 +1,7 @@
 warning: no msg types should use cosmwasm::Addr
   --> $DIR/main.rs:9:1
    |
-LL | / struct ExecuteMsg {
+LL | / struct InstantiateMsg {
 LL | |     addr: cosmwasm_std::Addr,
 LL | | }
    | |_^

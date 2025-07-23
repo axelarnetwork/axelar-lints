@@ -1,7 +1,7 @@
 warning: no msg types should use cosmwasm::Addr
   --> $DIR/main.rs:9:1
    |
-LL | / enum InstantiateMsg {
+LL | / enum ExecuteMsg {
 LL | |     Addr(Addr),
 LL | | }
    | |_^
