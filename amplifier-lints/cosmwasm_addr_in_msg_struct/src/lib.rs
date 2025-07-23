@@ -18,7 +18,11 @@ impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx Item<'tcx>) {
         match item.kind {
             ItemKind::Struct(ident, variant_data, _) => {
-                if ident.name.as_str() != "InstantiateMsg" && ident.name.as_str() != "MigrateMsg" {
+                if ident.name.as_str() != "ExecuteMsg"
+                    && ident.name.as_str() != "InstantiateMsg"
+                    && ident.name.as_str() != "QueryMsg"
+                    && ident.name.as_str() != "MigrateMsg"
+                {
                     return;
                 }
 
@@ -31,7 +35,11 @@ impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
                 });
             }
             ItemKind::Enum(ident, enum_def, _) => {
-                if ident.name.as_str() != "ExecuteMsg" && ident.name.as_str() != "QueryMsg" {
+                if ident.name.as_str() != "ExecuteMsg"
+                    && ident.name.as_str() != "InstantiateMsg"
+                    && ident.name.as_str() != "QueryMsg"
+                    && ident.name.as_str() != "MigrateMsg"
+                {
                     return;
                 }
 
