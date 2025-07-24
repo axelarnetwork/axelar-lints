@@ -1,5 +1,5 @@
 warning: use `Option<&u8>` instead
-  --> $DIR/main.rs:1:16
+  --> $DIR/main.rs:3:16
    |
 LL | fn opt_test(x: &Option<u8>) {}
    |                ^^^^^^^^^^^

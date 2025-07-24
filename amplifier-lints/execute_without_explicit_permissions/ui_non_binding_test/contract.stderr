@@ -1,5 +1,5 @@
 warning: last parameter is not a `binding` pattern, expected to call `ensure_permissions` on last parameter
-  --> $DIR/contract.rs:7:1
+  --> $DIR/contract.rs:9:1
    |
 LL | fn execute(_: Msg) {}
    | ^^^^^^^^^^^^^^^^^^^^^

@@ -1,19 +1,19 @@
 warning: getter functions should omit the `get_` prefix
-  --> $DIR/main.rs:1:4
+  --> $DIR/main.rs:3:4
    |
-LL | fn get_some_val() {
+LL | fn get_some_val() {}
    |    ^^^^^^^^^^^^
    |
    = note: `#[warn(get_fn)]` on by default
 
 warning: getter functions should omit the `get_` prefix
-  --> $DIR/main.rs:10:8
+  --> $DIR/main.rs:12:8
    |
-LL |     fn get_foo(&self) {
+LL |     fn get_foo(&self) {}
    |        ^^^^^^^
 
 warning: getter functions should omit the `get_` prefix
-  --> $DIR/main.rs:16:8
+  --> $DIR/main.rs:18:8
    |
 LL |     fn get_foo_trait(&self);
    |        ^^^^^^^^^^^^^

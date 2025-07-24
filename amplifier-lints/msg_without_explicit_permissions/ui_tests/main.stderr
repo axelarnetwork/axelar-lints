@@ -1,5 +1,5 @@
 warning: all ExecuteMsg enums should derive `Permissions`
-  --> $DIR/main.rs:1:1
+  --> $DIR/main.rs:3:1
    |
 LL | enum ExecuteMsg {}
    | ^^^^^^^^^^^^^^^^^^
