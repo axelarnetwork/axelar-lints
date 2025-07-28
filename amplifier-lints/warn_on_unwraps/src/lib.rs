@@ -34,6 +34,26 @@ impl<'tcx> LateLintPass<'tcx> for WarnOnUnwraps {
             if !is_option_or_result {
                 return;
             }
+
+            let mut current_id = expr.hir_id;
+            let mut automatically_derived = cx
+                .tcx
+                .is_automatically_derived(current_id.owner.to_def_id());
+
+            while let Some(parent) = cx.tcx.hir_get_enclosing_scope(current_id) {
+                current_id = parent;
+                if cx
+                    .tcx
+                    .is_automatically_derived(current_id.owner.to_def_id())
+                {
+                    automatically_derived = true;
+                }
+            }
+
+            if automatically_derived {
+                return;
+            }
+
             cx.span_lint(WARN_ON_UNWRAPS, span, |diag| {
                 diag.primary_message("avoid using `unwrap` if possible");
             });
