@@ -4,7 +4,7 @@ warning: avoid using `unwrap` if possible
 LL |     let _ = Some(42).unwrap();
    |                      ^^^^^^^^
    |
-   = note: `#[warn(warn_on_unwraps)]` on by default
+   = note: `#[warn(unwraps_outside_tests)]` on by default
 
 warning: avoid using `unwrap` if possible
   --> $DIR/main.rs:10:39
