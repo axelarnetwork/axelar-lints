@@ -50,7 +50,7 @@ From what it appears, test code will not be linted by default (correct if wrong)
 #[cfg_attr(dylint_lib = "LIBRARY_NAME", allow(LINT_NAME))]
 ```
 
-(e.g. LIBRARY_NAME="amplifier_lints", LINT_NAME="warn_on_unwrap"), or if it is a pre-expansion lint,
+(e.g. LIBRARY_NAME="amplifier_lints", LINT_NAME="unwraps_outside_tests"), or if it is a pre-expansion lint,
 
 ```sh
 #[allow(unknown_lints)]
@@ -62,4 +62,4 @@ NOTE: name your lint/library with underscores and not dashes in the `Cargo.toml`
 ## Credits
 
 - Credit to [Dylint](https://github.com/trailofbits/dylint)
-- Credit to GuillaumeGomez on GitHub for [warn_on_unwrap lint](https://github.com/GuillaumeGomez/rustc-tools-example)
+- Credit to GuillaumeGomez on GitHub for [unwraps_outside_tests lint](https://github.com/GuillaumeGomez/rustc-tools-example)

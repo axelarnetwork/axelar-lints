@@ -14,5 +14,5 @@ pub fn register_lints(sess: &rustc_session::Session, lint_store: &mut rustc_lint
     get_fn::register_lints(sess, lint_store);
     msg_without_explicit_permissions::register_lints(sess, lint_store);
     ref_opt_type::register_lints(sess, lint_store);
-    warn_on_unwraps::register_lints(sess, lint_store);
+    unwraps_outside_tests::register_lints(sess, lint_store);
 }
