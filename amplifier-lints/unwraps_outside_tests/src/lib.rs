@@ -47,6 +47,7 @@ impl<'tcx> LateLintPass<'tcx> for UnwrapsOutsideTests {
                     .is_automatically_derived(current_id.owner.to_def_id())
                 {
                     automatically_derived = true;
+                    break;
                 }
             }
 
