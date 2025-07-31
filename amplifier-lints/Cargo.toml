@@ -2,6 +2,7 @@
 name = "amplifier_lints"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.88.0"
 
 [package.metadata.rust-analyzer]
 rustc_private = true
