@@ -12,12 +12,12 @@ use rustc_middle::ty;
 use rustc_span::sym;
 
 dylint_linting::declare_late_lint! {
-    pub WARN_ON_UNWRAPS,
+    pub UNWRAPS_OUTSIDE_TESTS,
     Warn,
     "warns if `Option::unwrap` or `Result::unwrap` is called"
 }
 
-impl<'tcx> LateLintPass<'tcx> for WarnOnUnwraps {
+impl<'tcx> LateLintPass<'tcx> for UnwrapsOutsideTests {
     fn check_expr(&mut self, cx: &LateContext<'tcx>, expr: &'tcx Expr<'tcx>) {
         if let ExprKind::MethodCall(name, recv, _args, span) = expr.kind {
             if name.ident.as_str() != "unwrap" {
@@ -34,7 +34,28 @@ impl<'tcx> LateLintPass<'tcx> for WarnOnUnwraps {
             if !is_option_or_result {
                 return;
             }
-            cx.span_lint(WARN_ON_UNWRAPS, span, |diag| {
+
+            let mut current_id = expr.hir_id;
+            let mut automatically_derived = cx
+                .tcx
+                .is_automatically_derived(current_id.owner.to_def_id());
+
+            while let Some(parent) = cx.tcx.hir_get_enclosing_scope(current_id) {
+                current_id = parent;
+                if cx
+                    .tcx
+                    .is_automatically_derived(current_id.owner.to_def_id())
+                {
+                    automatically_derived = true;
+                    break;
+                }
+            }
+
+            if automatically_derived {
+                return;
+            }
+
+            cx.span_lint(UNWRAPS_OUTSIDE_TESTS, span, |diag| {
                 diag.primary_message("avoid using `unwrap` if possible");
             });
         }

@@ -22,7 +22,7 @@ dependencies = [
  "get_fn",
  "msg_without_explicit_permissions",
  "ref_opt_type",
- "warn_on_unwraps",
+ "unwraps_outside_tests",
 ]
 
 [[package]]
@@ -1304,6 +1304,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4a1a07cc7db3810833284e8d372ccdc6da29741639ecc70c9ec107df0fa6154c"
 
 [[package]]
+name = "unwraps_outside_tests"
+version = "0.1.0"
+dependencies = [
+ "dylint_linting",
+ "dylint_testing",
+]
+
+[[package]]
 name = "url"
 version = "2.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1346,14 +1354,6 @@ checksum = "29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b"
 dependencies = [
  "same-file",
  "winapi-util",
-]
-
-[[package]]
-name = "warn_on_unwraps"
-version = "0.1.0"
-dependencies = [
- "dylint_linting",
- "dylint_testing",
 ]
 
 [[package]]

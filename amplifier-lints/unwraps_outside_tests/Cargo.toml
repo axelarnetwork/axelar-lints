@@ -1,5 +1,5 @@
 [package]
-name = "warn_on_unwraps"
+name = "unwraps_outside_tests"
 version = "0.1.0"
 edition = "2024"
 

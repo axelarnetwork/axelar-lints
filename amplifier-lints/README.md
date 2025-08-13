@@ -11,6 +11,6 @@ Lints for the `axelar-amplifier` repository.
 | [`get_fn`](./amplifier-lints/get_fn) | Warns on any function beginning with `get_`. |
 | [`msg_without_explicit_permissions`](./msg_without_explicit_permissions) | Warns on any ExecuteMsg that doesn't derive Permissions. |
 | [`ref_opt_type`](./amplifier-lints/ref_opt_type) | Warns on any `&Option<T>`; use `Option<&T>` instead. |
-| [`warn_on_unwraps`](./amplifier-lints/warn_on_unwraps) | Warns on any unwraps used in production code. |
+| [`unwraps_outside_tests`](./amplifier-lints/unwraps_outside_tests) | Warns on any unwraps used in production code. |
 
 - TODO: add tests to lints

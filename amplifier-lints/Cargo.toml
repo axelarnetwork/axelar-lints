@@ -2,6 +2,7 @@
 name = "amplifier_lints"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.88.0"
 
 [package.metadata.rust-analyzer]
 rustc_private = true
@@ -16,7 +17,7 @@ execute_without_explicit_permissions = { path = "execute_without_explicit_permis
 get_fn = { path = "get_fn", features = ["rlib"] }
 msg_without_explicit_permissions = { path = "msg_without_explicit_permissions", features = ["rlib"] }
 ref_opt_type = { path = "ref_opt_type", features = ["rlib"] }
-warn_on_unwraps = { path = "warn_on_unwraps", features = ["rlib"] }
+unwraps_outside_tests = { path = "unwraps_outside_tests", features = ["rlib"] }
 
 [dev-dependencies]
 dylint_testing = { workspace = true }
