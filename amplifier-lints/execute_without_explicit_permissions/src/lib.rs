@@ -8,7 +8,7 @@ extern crate rustc_span;
 use rustc_hir::intravisit::{FnKind, Visitor, walk_body, walk_expr};
 use rustc_hir::{Body, ExprKind, FnDecl, PatKind, QPath};
 use rustc_lint::{LateContext, LateLintPass, LintContext};
-use rustc_span::{FileName, RealFileName, Span, def_id::LocalDefId, symbol::Ident};
+use rustc_span::{FileName, Span, def_id::LocalDefId, symbol::Ident};
 
 dylint_linting::declare_late_lint! {
     pub EXECUTE_WITHOUT_EXPLICIT_PERMISSIONS,
@@ -53,7 +53,8 @@ fn is_contract_rs_execute(cx: &LateContext<'_>, span: Span) -> bool {
     let source_map = cx.tcx.sess.source_map();
     let file_name = source_map.span_to_filename(span);
 
-    if let FileName::Real(RealFileName::LocalPath(path)) = file_name
+    if let FileName::Real(real_name) = file_name
+        && let Some(path) = real_name.local_path()
         && path.ends_with("contract.rs")
     {
         return true;

@@ -9,7 +9,7 @@ extern crate rustc_span;
 use rustc_hir::{Item, ItemKind};
 use rustc_lint::{LateContext, LateLintPass, LintContext};
 use rustc_middle::ty::AssocKind;
-use rustc_span::symbol::Ident;
+use rustc_span::Symbol;
 
 dylint_linting::declare_late_lint! {
     pub MSG_WITHOUT_EXPLICIT_PERMISSIONS,
@@ -29,15 +29,11 @@ impl<'tcx> LateLintPass<'tcx> for MsgWithoutExplicitPermissions {
 
             for impl_id in impls {
                 let associated_items = cx.tcx.associated_items(impl_id);
-                if associated_items
-                    .find_by_name_and_kind(
-                        cx.tcx,
-                        Ident::from_str("ensure_permissions"),
-                        AssocKind::Fn,
-                        item.owner_id.to_def_id(),
-                    )
-                    .is_some()
-                {
+                let has_ensure_permissions = associated_items.in_definition_order().any(|assoc| {
+                    matches!(assoc.kind, AssocKind::Fn { .. })
+                        && assoc.name() == Symbol::intern("ensure_permissions")
+                });
+                if has_ensure_permissions {
                     return;
                 }
             }
