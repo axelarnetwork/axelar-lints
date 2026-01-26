@@ -62,15 +62,15 @@ impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
 
 fn check_cosmwasm_addr_in_field(cx: &LateContext, fields: &[FieldDef]) -> bool {
     for field in fields {
-        if let TyKind::Path(QPath::Resolved(_, path)) = field.ty.kind {
-            if let Res::Def(_, def_id) = path.res {
-                let path_str = cx.tcx.def_path_str(def_id);
-                if path_str != "cosmwasm_std::Addr" {
-                    continue;
-                }
-
-                return true;
+        if let TyKind::Path(QPath::Resolved(_, path)) = field.ty.kind
+            && let Res::Def(_, def_id) = path.res
+        {
+            let path_str = cx.tcx.def_path_str(def_id);
+            if path_str != "cosmwasm_std::Addr" {
+                continue;
             }
+
+            return true;
         }
     }
     false
