@@ -24,7 +24,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly-2025-04-03
+          toolchain: nightly-2025-05-17
           components: rustc-dev, llvm-tools-preview
           override: true
 
@@ -108,7 +108,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly-2025-04-03
+          toolchain: nightly-2025-05-17
           components: rustc-dev, llvm-tools-preview, clippy
           override: true
 

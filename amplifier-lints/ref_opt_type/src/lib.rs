@@ -25,7 +25,7 @@ impl<'tcx> LateLintPass<'tcx> for RefOptType {
             let inner_snippet = get_snippet_or_default(cx, path);
 
             cx.span_lint(REF_OPT_TYPE, ty.span, |diag| {
-                diag.primary_message(format!("use `Option<&{}>` instead", inner_snippet));
+                diag.primary_message(format!("use `Option<&{inner_snippet}>` instead"));
             });
         }
     }

@@ -17,7 +17,7 @@ dylint_linting::declare_late_lint! {
 impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
     fn check_item(&mut self, cx: &LateContext<'tcx>, item: &'tcx Item<'tcx>) {
         match item.kind {
-            ItemKind::Struct(ident, variant_data, _) => {
+            ItemKind::Struct(ident, variant_data, _generics) => {
                 if ident.name.as_str() != "ExecuteMsg"
                     && ident.name.as_str() != "InstantiateMsg"
                     && ident.name.as_str() != "QueryMsg"
@@ -34,7 +34,7 @@ impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
                     });
                 });
             }
-            ItemKind::Enum(ident, enum_def, _) => {
+            ItemKind::Enum(ident, enum_def, _generics) => {
                 if ident.name.as_str() != "ExecuteMsg"
                     && ident.name.as_str() != "InstantiateMsg"
                     && ident.name.as_str() != "QueryMsg"
@@ -62,15 +62,15 @@ impl<'tcx> LateLintPass<'tcx> for CosmwasmAddrInMsgStruct {
 
 fn check_cosmwasm_addr_in_field(cx: &LateContext, fields: &[FieldDef]) -> bool {
     for field in fields {
-        if let TyKind::Path(QPath::Resolved(_, path)) = field.ty.kind {
-            if let Res::Def(_, def_id) = path.res {
-                let path_str = cx.tcx.def_path_str(def_id);
-                if path_str != "cosmwasm_std::Addr" {
-                    continue;
-                }
-
-                return true;
+        if let TyKind::Path(QPath::Resolved(_, path)) = field.ty.kind
+            && let Res::Def(_, def_id) = path.res
+        {
+            let path_str = cx.tcx.def_path_str(def_id);
+            if path_str != "cosmwasm_std::Addr" {
+                continue;
             }
+
+            return true;
         }
     }
     false
